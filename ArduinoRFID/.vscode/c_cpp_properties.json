@@ -3,6 +3,7 @@
         {
             "name": "Win32",
             "includePath": [
+                "C:\\Users\\falcu\\Documents\\Arduino\\libraries\\MFRC522\\src",
                 "D:\\Arduino\\tools\\**",
                 "D:\\Arduino\\hardware\\arduino\\avr\\**",
                 "C:\\Users\\falcu\\AppData\\Local\\Arduino15\\packages\\esp8266\\tools\\**",
