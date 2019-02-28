@@ -1,19 +1,36 @@
 ﻿using System;
 using System.IO.Ports;
+using System.Threading.Tasks;
 
 namespace ServerSide
 {
     partial class SerialPortClass
     {
         private SerialPort sp;
+        private Database db;
+
 
         public void init()
         {
             sp = new SerialPort(Get_Port_Name(), Get_Baudrate(), Parity.None, 8, StopBits.One);
+            db = new Database();
             sp.DtrEnable = true;
             sp.DataReceived += serialComms_DataReceived;
             sp.Open();
-            while (sp.IsOpen) ;
+            db.init();
+            Get_Command_Line_Command();
+        }
+
+        private void Get_Command_Line_Command()
+        {
+            string command = Console.ReadLine().ToUpper();
+
+            switch (command)
+            {
+                case "Q":
+                case "QUIT": Environment.Exit(0); break ;
+                default: Get_Command_Line_Command(); break;
+            }
         }
 
         private string Get_Port_Name()
@@ -86,10 +103,16 @@ namespace ServerSide
             }
         }
 
-        public void Get_Serial_Reading(string text)
+        private void Get_Serial_Reading(string text)
         {
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine(text);
+            DB_Insert(text);
+        }
+
+        private void DB_Insert(string query_value)
+        {
+            db.Insert_Query(query_value, "NAME");
         }
 
         void serialComms_DataReceived(object sender, SerialDataReceivedEventArgs e)
