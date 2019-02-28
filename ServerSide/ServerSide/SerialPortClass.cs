@@ -3,7 +3,7 @@ using System.IO.Ports;
 
 namespace ServerSide
 {
-    class SerialPortClass
+    partial class SerialPortClass
     {
         private SerialPort sp;
 
@@ -94,7 +94,7 @@ namespace ServerSide
 
         void serialComms_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
-            String message = sp.ReadLine();
+            string message = sp.ReadLine();
             Get_Serial_Reading(message);
         }
     }
