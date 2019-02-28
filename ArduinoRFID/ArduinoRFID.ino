@@ -20,7 +20,6 @@ void loop()
         getID(uid);
         if (uid != -1)
         {
-            Serial.print("Card detected, UID: ");
             for (int i = 0; i < 4; i++)
             {
                 Serial.print(uid[i]);
