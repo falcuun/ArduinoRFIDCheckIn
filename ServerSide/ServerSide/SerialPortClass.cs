@@ -28,12 +28,14 @@ namespace ServerSide
 
             foreach (string port in available_ports)
             {
+                Console.ForegroundColor = ConsoleColor.Blue;
                 Console.Write(index + ": ");
                 Console.WriteLine(port);
                 index++;
             }
 
             Console.WriteLine();
+            Console.ForegroundColor = ConsoleColor.White;
             Console.Write("Choose The Port By Index: ");
 
             try
@@ -41,7 +43,7 @@ namespace ServerSide
                 int choice = Console.ReadLine()[0] - '0';
                 port_name = available_ports[choice];
                 Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine("Baudrate is: " + port_name);
+                Console.WriteLine("Port Name is: " + port_name);
                 return port_name;
             }
             catch (FormatException)
@@ -84,15 +86,16 @@ namespace ServerSide
             }
         }
 
-        public string Get_Serial_Reading
+        public void Get_Serial_Reading(string text)
         {
-            get; set;
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine(text);
         }
 
         void serialComms_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
-            Get_Serial_Reading = sp.ReadLine();
-            Console.WriteLine(Get_Serial_Reading);
+            String message = sp.ReadLine();
+            Get_Serial_Reading(message);
         }
     }
 }
