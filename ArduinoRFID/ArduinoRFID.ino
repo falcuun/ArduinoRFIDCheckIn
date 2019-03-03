@@ -30,11 +30,18 @@ void loop()
         getID(uid);
         if (uid != -1)
         {
+            display.clearDisplay();
+            display.setTextSize(1);
+            display.setTextColor(WHITE);
+            display.setCursor(27, 30);
             for (int i = 0; i < 4; i++)
             {
                 Serial.print(uid[i]);
                 Serial.print(" ");
+                display.print(uid[i]);
+                display.print(" ");
             }
+            display.display();
             Serial.println();
         }
     }
